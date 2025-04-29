@@ -1,0 +1,97 @@
+/* styles/Home.module.css */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--gap);
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title {
+  margin: 0;
+  font-size: 2rem;
+}
+.nav {
+  display: flex;
+  gap: var(--gap);
+}
+.navLink {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+}
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+}
+@media (max-width: 600px) {
+  .nav { display: none; }
+  .hamburger { display: block; }
+  .nav.open { 
+    display: flex; 
+    flex-direction: column; 
+    gap: var(--gap);
+    margin-top: var(--gap);
+  }
+}
+
+.form {
+  display: flex;
+  gap: var(--gap);
+  margin-top: var(--gap);
+}
+.input {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radius);
+}
+.button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-primary);
+  color: white;
+  cursor: pointer;
+  position: relative;
+}
+.button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* спиннер */
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(255,255,255,0.6);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+@keyframes spin {
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+.result {
+  margin-top: var(--gap);
+  font-size: 1.1rem;
+}
+.history {
+  list-style: none;
+  padding: 0;
+  margin-top: calc(var(--gap) * 2);
+}
+.historyItem {
+  margin-bottom: 0.5rem;
+}
+.historyLink {
+  font-weight: 500;
+}

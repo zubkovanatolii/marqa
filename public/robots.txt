@@ -1,0 +1,6 @@
+# public/robots.txt
+User-agent: *
+Allow: /
+
+# URL вашего локального sitemap
+Sitemap: http://localhost:3000/sitemap.xml
