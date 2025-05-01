@@ -1,7 +1,7 @@
 // pages/index.js
 import Link from 'next/link'
 import { useState } from 'react'
-import Spinner from '../components/Spinner'
+import Spinner from '../components/Spinner'  // предположительно у тебя есть этот компонент
 
 export default function Home({ theme, setTheme }) {
   const [url, setUrl]         = useState('')
@@ -36,7 +36,7 @@ export default function Home({ theme, setTheme }) {
 
   return (
     <div className="container">
-      <header className="header">
+      <header>
         <h1>MARQA — Комплексный аудит</h1>
         <div className="controls">
           <button

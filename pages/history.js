@@ -1,42 +1,60 @@
 // pages/history.js
-import Seo from '../components/Seo';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
-export default function History() {
+export default function HistoryPage() {
   const [history, setHistory] = useState([]);
 
   useEffect(() => {
-    const stored = localStorage.getItem('history');
-    if (stored) setHistory(JSON.parse(stored));
+    const stored = JSON.parse(localStorage.getItem('mrqaHistory') || '[]');
+    setHistory(stored);
   }, []);
 
-  return (
-    <>
-      <Seo
-        title="История проверок | MARQA"
-        description="Здесь отображается история всех проверок URL-адресов в MARQA."
-        url="https://marqa.vercel.app/history"
-      />
-      <Header />
+  const clearAll = () => {
+    if (confirm('Очистить всю историю?')) {
+      localStorage.removeItem('mrqaHistory');
+      setHistory([]);
+    }
+  };
 
-      <main style={{display:'flex',flexDirection:'column',alignItems:'center',padding:'80px 20px'}}>
-        <h1 style={{fontSize:'36px',fontWeight:'bold',marginBottom:'20px'}}>MARQA — История Проверок</h1>
-        {history.length===0 ? (
-          <p style={{marginTop:'20px',fontSize:'18px'}}>История пока пуста</p>
-        ) : (
-          <ul style={{marginTop:'20px',width:'100%',maxWidth:'600px',listStyle:'none',padding:0}}>
-            {history.map((item,i)=>(
-              <li key={i} style={{marginBottom:'10px',padding:'10px',background:'#fff',borderRadius:'8px',boxShadow:'0 2px 8px rgba(0,0,0,0.1)'}}>
-                {item}
+  return (
+    <div className="container">
+      <h1>История проверок</h1>
+
+      {history.length === 0 ? (
+        <p>Пока нет ни одной проверки.</p>
+      ) : (
+        <>
+          <button
+            onClick={clearAll}
+            style={{ marginBottom: '1rem', padding: '0.5rem 1rem' }}
+          >
+            Очистить историю
+          </button>
+          <ul>
+            {history.map((item, i) => (
+              <li key={i} style={{ marginBottom: '0.5rem' }}>
+                [{item.time}]&nbsp;
+                <a href={item.url} target="_blank" rel="noreferrer">
+                  {item.url}
+                </a>&nbsp;–&nbsp;
+                <strong
+                  style={{ color: item.performance >= 80 ? 'green' : 'orange' }}
+                >
+                  {item.performance}%
+                </strong>
               </li>
             ))}
           </ul>
-        )}
-      </main>
+        </>
+      )}
 
-      <Footer />
-    </>
+      {/* Простая ссылка без вложенного <a> */}
+      <p style={{ marginTop: '2rem' }}>
+        <Link href="/">
+          ← Назад на главную
+        </Link>
+      </p>
+    </div>
   );
 }

@@ -1,13 +1,11 @@
 // pages/index.js
-import Link from 'next/link'
 import { useState } from 'react'
-import Spinner from '../components/Spinner'
 
 export default function Home({ theme, setTheme }) {
-  const [url, setUrl]         = useState('')
+  const [url, setUrl] = useState('')
   const [loading, setLoading] = useState(false)
   const [results, setResults] = useState(null)
-  const [error, setError]     = useState('')
+  const [error, setError] = useState('')
 
   const handleCheck = async () => {
     setError('')
@@ -36,18 +34,15 @@ export default function Home({ theme, setTheme }) {
 
   return (
     <div className="container">
-      <header className="header">
+      <header>
         <h1>MARQA — Комплексный аудит</h1>
         <div className="controls">
           <button
-            onClick={() => setTheme(t => t==='light'?'dark':'light')}
+            onClick={() => setTheme(t => t === 'light' ? 'dark' : 'light')}
             className="theme-toggle"
           >
-            {theme==='light' ? '🌙 Тёмная' : '☀️ Светлая'}
+            {theme === 'light' ? '🌙 Тёмная' : '☀️ Светлая'}
           </button>
-          <Link href="/history" legacyBehavior>
-            <a className="history-btn">История</a>
-          </Link>
         </div>
       </header>
 
@@ -56,10 +51,10 @@ export default function Home({ theme, setTheme }) {
           type="url"
           placeholder="https://example.com"
           value={url}
-          onChange={e=>setUrl(e.target.value)}
+          onChange={e => setUrl(e.target.value)}
         />
-        <button onClick={handleCheck} disabled={loading||!url}>
-          {loading ? <Spinner /> : 'Проверить'}
+        <button onClick={handleCheck} disabled={loading || !url}>
+          {loading ? 'Проверка…' : 'Проверить'}
         </button>
       </div>
 
@@ -77,11 +72,7 @@ export default function Home({ theme, setTheme }) {
             }[key]
             const val = results[key]
             return (
-              <div
-                key={key}
-                className="result-item"
-                style={{ color: colorFor(val) }}
-              >
+              <div key={key} className="result-item" style={{ color: colorFor(val) }}>
                 {label}: {val}%
               </div>
             )

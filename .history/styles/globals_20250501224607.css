@@ -1,0 +1,17 @@
+/* styles/globals.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+input, button, a {
+  font-family: inherit;
+}
+button {
+  cursor: pointer;
+}
